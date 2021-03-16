@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SQL Monitor Format</title>
+  <style>
+    .sample-textarea-container {
+      display: flex;
+    }
+
+    .sample-textarea-container > div {
+      padding-right: 16px;
+    }
+
+    .deduplicationa-container {
+      padding-left: 16px;
+    }
+
+    .left-right-textarea-container {
+      height: 80vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .left-textarea {
+      width: 100%;
+      height: 100%;
+    }
+
+    .right-textarea {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sample-textarea-container">
+    <div>
+      範例
+    </div>
+    <textarea rows="3" cols="80" class="sample-textarea"></textarea>
+
+    <div class="deduplicationa-container">
+      是否去重複？
+      <input type="radio" id="use-deduplication-yes" name="use-deduplication" value="yes" />
+      <label for="use-deduplication-yes">yes</label>
+      <input type="radio" id="use-deduplication-no" name="use-deduplication" value="no" checked />
+      <label for="use-deduplication-no">no</label>
+    </div>
+  </div>
+
+  <hr />
+
+  <br />
+
+  <div class="left-right-textarea-container">
+    <textarea class="left-textarea"></textarea>
+    <textarea class="right-textarea" readonly></textarea>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+  <script src="parseGrid.js"></script>
+
+</body>
+</html>
