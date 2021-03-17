@@ -53,18 +53,29 @@ const rightTextarea = document.querySelector('.right-textarea');
 const setRightValue = () => {
   const leftTextareaContent = leftTextarea.value;
 
-  const splitContentSentences = leftTextareaContent.split('|');
+  const splitContentSentences = leftTextareaContent.split('\n');
 
-  // const trimSqlSentences = splitContentSentences.map((sentence) => sentence.trim());
+  const mapped = splitContentSentences
+    .filter((sentence) => sentence)
+    .map((sentence) => {
+      const splitSentences = sentence.split('|');
+      
+      if (splitSentences.length < 34 && !splitSentences[0].includes('*')) {
+        splitSentences.unshift('');
+      }
 
-  const useDeduplicationChecked = document.querySelector('input[name=use-deduplication]:checked');
-  const isUseDeduplication = useDeduplicationChecked.value === 'yes';
+      const useDeduplicationChecked = document.querySelector('input[name=use-deduplication]:checked');
+      const isUseDeduplication = useDeduplicationChecked.value === 'yes';
+    
+      const uniqueSqlSentences = isUseDeduplication ? _.uniq(splitSentences) : splitSentences;
+    
+      const zippedObject = _.zipObject(keys, uniqueSqlSentences);
 
-  const uniqueSqlSentences = isUseDeduplication ? _.uniq(splitContentSentences) : splitContentSentences;
+      return zippedObject;
+    });
 
-  const zippedObject = _.zipObject(keys, uniqueSqlSentences);
 
-  rightTextarea.value = JSON.stringify(zippedObject, null, 2);
+  rightTextarea.value = JSON.stringify(mapped, null, 2);
 };
 
 leftTextarea.addEventListener('input', setRightValue);
